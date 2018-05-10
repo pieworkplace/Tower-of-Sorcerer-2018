@@ -177,7 +177,7 @@
     };
 
     Window_EnemyBookIndex.prototype.maxCols = function() {
-        return 3;
+        return 1;
     };
 
     Window_EnemyBookIndex.prototype.maxItems = function() {
@@ -223,6 +223,15 @@
             name = unknownData;
         }
         this.drawText(name, rect.x, rect.y, rect.width);
+    };
+    Window_EnemyBookIndex.prototype.drawItem = function(index) {
+        var enemy = this._list[index];
+        var rect = this.itemRectForText(index);
+        var name;
+        if ($gameSystem.isInEnemyBook(enemy)) {
+            name = enemy.name;
+            this.drawText(name, rect.x, rect.y, rect.width);
+        }
     };
 
     Window_EnemyBookIndex.prototype.processCancel = function() {
