@@ -253,8 +253,10 @@
         this._enemySprite = new Sprite();
         this._enemySprite.anchor.x = 0.5;
         this._enemySprite.anchor.y = 0.5;
-        this._enemySprite.x = width / 2 - 20;
-        this._enemySprite.y = height / 2;
+        // this._enemySprite.x = width / 2 - 20;
+        // this._enemySprite.y = height / 2;
+        this._enemySprite.x = 40;
+        this._enemySprite.y = 40;
         this.addChildToBack(this._enemySprite);
         this.refresh();
     };
@@ -304,18 +306,44 @@
         this._enemySprite.bitmap = bitmap;
 
         this.resetTextColor();
-        this.drawText(enemy.name, x, y);
+        this.drawText(enemy.name, x + 60, y + 6);
 
         x = this.textPadding();
-        y = lineHeight + this.textPadding();
+        y = lineHeight + this.textPadding() * 2;
 
-        for (var i = 0; i < 8; i++) {
-            this.changeTextColor(this.systemColor());
-            this.drawText(TextManager.param(i), x, y, 160);
-            this.resetTextColor();
-            this.drawText(enemy.params[i], x + 160, y, 60, 'right');
-            y += lineHeight;
-        }
+        // for (var i = 0; i < 8; i++) {
+        //     this.changeTextColor(this.systemColor());
+        //     this.drawText(TextManager.param(i), x, y, 160);
+        //     this.resetTextColor();
+        //     this.drawText(enemy.params[i], x + 160, y, 60, 'right');
+        //     y += lineHeight;
+        // }
+        this.changeTextColor(this.systemColor());
+        this.drawTextEx(enemy.meta.desc1, x, y, 160);
+        this.drawTextEx(enemy.meta.desc2, x, y, 160);
+        this.resetTextColor();
+        // this.drawText(enemy.params[0], x + 160, y, 60, 'right');
+        y += lineHeight;
+
+        this.changeTextColor(this.systemColor());
+        this.drawText("生命", x, y, 160);
+        this.resetTextColor();
+        this.drawText(enemy.params[0], x + 160, y, 60, 'right');
+        y += lineHeight;
+
+        this.changeTextColor(this.systemColor());
+        this.drawText("攻击", x, y, 160);
+        this.resetTextColor();
+        this.drawText(enemy.params[2], x + 160, y, 60, 'right');
+        y += lineHeight;
+
+        this.changeTextColor(this.systemColor());
+        this.drawText("防御", x, y, 160);
+        this.resetTextColor();
+        this.drawText(enemy.params[3], x + 160, y, 60, 'right');
+        y += lineHeight;
+
+
 
         var rewardsWidth = 280;
         x = this.contents.width - rewardsWidth;
@@ -332,7 +360,8 @@
         this.drawText(enemy.gold, x, y);
         x += this.textWidth(enemy.gold) + 6;
         this.changeTextColor(this.systemColor());
-        this.drawText(TextManager.currencyUnit, x, y);
+        // this.drawText(TextManager.currencyUnit, x, y);
+        this.drawText("金币", x, y);
 
         x = this.contents.width - rewardsWidth;
         y += lineHeight;
@@ -349,8 +378,8 @@
         var descWidth = 480;
         x = this.contents.width - descWidth;
         y = this.textPadding() + lineHeight * 7;
-        this.drawTextEx(enemy.meta.desc1, x, y + lineHeight * 0, descWidth);
-        this.drawTextEx(enemy.meta.desc2, x, y + lineHeight * 1, descWidth);
+        // this.drawTextEx(enemy.meta.desc1, x, y + lineHeight * 0, descWidth);
+        // this.drawTextEx(enemy.meta.desc2, x, y + lineHeight * 1, descWidth);
     };
 
 })();
