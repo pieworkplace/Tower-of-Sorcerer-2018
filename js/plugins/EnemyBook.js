@@ -320,7 +320,6 @@
         // }
         this.changeTextColor(this.systemColor());
         this.drawTextEx(enemy.meta.desc1, x, y, 160);
-        this.drawTextEx(enemy.meta.desc2, x, y, 160);
         this.resetTextColor();
         // this.drawText(enemy.params[0], x + 160, y, 60, 'right');
         y += lineHeight;
@@ -329,39 +328,85 @@
         this.drawText("生命", x, y, 160);
         this.resetTextColor();
         this.drawText(enemy.params[0], x + 160, y, 60, 'right');
+
+        this.changeTextColor(this.systemColor());
+        this.drawText("经验", x + 320, y, 160);
+        this.resetTextColor();
+        this.drawText(enemy.exp, x + 480, y, 60, 'right');
         y += lineHeight;
 
         this.changeTextColor(this.systemColor());
         this.drawText("攻击", x, y, 160);
         this.resetTextColor();
         this.drawText(enemy.params[2], x + 160, y, 60, 'right');
+
+        this.changeTextColor(this.systemColor());
+        this.drawText("金币", x + 320, y, 160);
+        this.resetTextColor();
+        this.drawText(enemy.gold, x + 480, y, 60, 'right');
         y += lineHeight;
 
         this.changeTextColor(this.systemColor());
         this.drawText("防御", x, y, 160);
         this.resetTextColor();
         this.drawText(enemy.params[3], x + 160, y, 60, 'right');
+        
+        this.changeTextColor(this.systemColor());
+        this.drawText("估计伤害", x + 320, y, 160);
+        this.resetTextColor();
+
+        var pie_result = "";
+        var soldier_atk = $gameParty.leader().atk;
+        var monster_atk = enemy.params[2];
+        var soldier_def = $gameParty.leader().def;
+        var monster_def = enemy.params[3];
+        var monster_hp = enemy.params[0];
+
+        if (monster_def>= soldier_atk){
+        	pie_result = "死亡";
+        } else if (enemy.params[7] === 1 || enemy.params[7] === 3 || enemy.params[7] === 4){//普通 仇恨
+        	//战斗次数：怪物生命÷（勇士攻击－怪物防御)[注：舍小数点取整数]
+			//损失计算：战斗次数×（怪物攻击－勇士防御）×怪物进攻
+			if ((monster_hp % (soldier_atk - monster_def)) === 0){
+				pie_result = (monster_hp / (soldier_atk - monster_def) - 1) * (monster_atk - soldier_def);
+			} else{
+				pie_result = parseInt(monster_hp / (soldier_atk - monster_def)) * (monster_atk - soldier_def);
+			}
+			pie_result = pie_result >= 0? pie_result : 0;
+        } else if (enemy.params[7] === 2){//先攻
+			if ((monster_hp % (soldier_atk - monster_def)) === 0){
+				pie_result = (monster_hp / (soldier_atk - monster_def)) * (monster_atk - soldier_def);
+			} else{
+				pie_result = (parseInt(monster_hp / (soldier_atk - monster_def)) + 1) * (monster_atk - soldier_def);
+			}
+			pie_result = pie_result >= 0? pie_result : 0;
+        }
+        else{
+        	pie_result = "未知";
+        }
+
+        this.drawText(pie_result, x + 480, y, 60, 'right');
         y += lineHeight;
 
-
+		this.drawTextEx(enemy.meta.desc2, x, y, 160);
 
         var rewardsWidth = 280;
         x = this.contents.width - rewardsWidth;
         y = lineHeight + this.textPadding();
 
-        this.resetTextColor();
-        this.drawText(enemy.exp, x, y);
-        x += this.textWidth(enemy.exp) + 6;
-        this.changeTextColor(this.systemColor());
-        this.drawText(TextManager.expA, x, y);
-        x += this.textWidth(TextManager.expA + '  ');
+        // this.resetTextColor();
+        // this.drawText(enemy.exp, x, y);
+        // x += this.textWidth(enemy.exp) + 6;
+        // this.changeTextColor(this.systemColor());
+        // this.drawText(TextManager.expA, x, y);
+        // x += this.textWidth(TextManager.expA + '  ');
 
-        this.resetTextColor();
-        this.drawText(enemy.gold, x, y);
-        x += this.textWidth(enemy.gold) + 6;
-        this.changeTextColor(this.systemColor());
-        // this.drawText(TextManager.currencyUnit, x, y);
-        this.drawText("金币", x, y);
+        // this.resetTextColor();
+        // this.drawText(enemy.gold, x, y);
+        // x += this.textWidth(enemy.gold) + 6;
+        // this.changeTextColor(this.systemColor());
+        // // this.drawText(TextManager.currencyUnit, x, y);
+        // this.drawText("金币", x, y);
 
         x = this.contents.width - rewardsWidth;
         y += lineHeight;
