@@ -5,3 +5,8 @@ popup info:RMMV.CO - LTN Games or just LTN Games
 ËØ²Ä:°ÂÄ¾È¾î®
 dialog: Yanfly Engine
 hotkey: Yanfly Engine
+fastbattle: ktakaki, ĞÇ•
+//Parallel Common Events in Battle: Barreytor
+victory aftermath: Yanfly Engine
+//summon actor: SumRndmDde http://sumrndm.site/
+finer enemy position: Mr. Trivel

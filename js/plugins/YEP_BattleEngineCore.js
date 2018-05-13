@@ -5388,16 +5388,16 @@ Window_BattleLog.prototype.waitForPopups = function() {
 Yanfly.BEC.Window_BattleLog_displayAction =
     Window_BattleLog.prototype.displayAction;
 Window_BattleLog.prototype.displayAction = function(subject, item) {
-    if (Yanfly.Param.BECFullActText) {
-      Yanfly.BEC.Window_BattleLog_displayAction.call(this, subject, item);
-    } else {
-      this._actionIcon = this.displayIcon(item);
-      var text = this.displayText(item);
-      this.push('addText', '<SIMPLE>' + text);
-      if (item.message2) {
-        this.push('addText', '<CENTER>' + item.message2.format(text));
-      }
-    }
+    // if (Yanfly.Param.BECFullActText) {
+    //   Yanfly.BEC.Window_BattleLog_displayAction.call(this, subject, item);
+    // } else {
+    //   this._actionIcon = this.displayIcon(item);
+    //   var text = this.displayText(item);
+    //   this.push('addText', '<SIMPLE>' + text);
+    //   if (item.message2) {
+    //     this.push('addText', '<CENTER>' + item.message2.format(text));
+    //   }
+    // }
 };
 
 Window_BattleLog.prototype.displayIcon = function(item) {
@@ -5413,18 +5413,18 @@ Window_BattleLog.prototype.displayText = function(item) {
 Yanfly.BEC.Window_BattleLog_displayActionResults =
     Window_BattleLog.prototype.displayActionResults;
 Window_BattleLog.prototype.displayActionResults = function(subject, target) {
-    if (Yanfly.Param.BECOptSpeed) {
-      if (target.result().used) {
-          this.displayCritical(target);
-          this.displayDamage(target);
-          this.displayAffectedStatus(target);
-          this.displayFailure(target);
-      }
-    } else {
-      Yanfly.BEC.Window_BattleLog_displayActionResults.call(this, subject,
-          target);
-    }
-    if (target.isDead()) target.performCollapse();
+    // if (Yanfly.Param.BECOptSpeed) {
+    //   if (target.result().used) {
+    //       this.displayCritical(target);
+    //       this.displayDamage(target);
+    //       this.displayAffectedStatus(target);
+    //       this.displayFailure(target);
+    //   }
+    // } else {
+    //   Yanfly.BEC.Window_BattleLog_displayActionResults.call(this, subject,
+    //       target);
+    // }
+    // if (target.isDead()) target.performCollapse();
 };
 
 Yanfly.BEC.Window_BattleLog_drawLineText =

@@ -860,23 +860,23 @@ Scene_Map.prototype.updateEncounterEffect = function() {
         var zoomX = $gamePlayer.screenX();
         var zoomY = $gamePlayer.screenY() - 24;
         if (n === 2) {
-            $gameScreen.setZoom(zoomX, zoomY, 1);
+            // $gameScreen.setZoom(zoomX, zoomY, 1);
             this.snapForBattleBackground();
-            this.startFlashForEncounter(speed / 2);
+            // this.startFlashForEncounter(speed / 2);
         }
-        $gameScreen.setZoom(zoomX, zoomY, q);
+        // $gameScreen.setZoom(zoomX, zoomY, q);
         if (n === Math.floor(speed / 6)) {
-            this.startFlashForEncounter(speed / 2);
+            // this.startFlashForEncounter(speed / 2);
         }
         if (n === Math.floor(speed / 2)) {
             BattleManager.playBattleBgm();
-            this.startFadeOut(this.fadeSpeed());
+            // this.startFadeOut(this.fadeSpeed());
         }
     }
 };
 
 Scene_Map.prototype.snapForBattleBackground = function() {
-    this._windowLayer.visible = false;
+    this._windowLayer.visible = true;
     SceneManager.snapForBackground();
     this._windowLayer.visible = true;
 };
@@ -887,7 +887,7 @@ Scene_Map.prototype.startFlashForEncounter = function(duration) {
 };
 
 Scene_Map.prototype.encounterEffectSpeed = function() {
-    return 60;
+    return 2;
 };
 
 //-----------------------------------------------------------------------------
