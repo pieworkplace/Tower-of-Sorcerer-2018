@@ -364,7 +364,7 @@
 
         if (monster_def>= soldier_atk){
         	pie_result = "死亡";
-        } else if (enemy.params[7] === 1 || enemy.params[7] === 3 || enemy.params[7] === 4){//普通 仇恨
+        } else if (enemy.params[7] === 1 || enemy.params[7] === 3 || enemy.params[7] === 4 || enemy.params[7] === 5){//普通 仇恨 黏稠
         	//战斗次数：怪物生命÷（勇士攻击－怪物防御)[注：舍小数点取整数]
 			//损失计算：战斗次数×（怪物攻击－勇士防御）×怪物进攻
 			if ((monster_hp % (soldier_atk - monster_def)) === 0){
@@ -373,13 +373,20 @@
 				pie_result = parseInt(monster_hp / (soldier_atk - monster_def)) * (monster_atk - soldier_def);
 			}
 			pie_result = pie_result >= 0? pie_result : 0;
-        } else if (enemy.params[7] === 2){//先攻
+        } else if (enemy.params[7] === 2 || enemy.params[7] === 6){//先攻 (黏稠+先攻) 
 			if ((monster_hp % (soldier_atk - monster_def)) === 0){
 				pie_result = (monster_hp / (soldier_atk - monster_def)) * (monster_atk - soldier_def);
 			} else{
 				pie_result = (parseInt(monster_hp / (soldier_atk - monster_def)) + 1) * (monster_atk - soldier_def);
 			}
 			pie_result = pie_result >= 0? pie_result : 0;
+        }
+        else if (enemy.params[7] === 7){//二连击
+			if ((monster_hp % (soldier_atk - monster_def)) === 0){
+				pie_result = (monster_hp / (soldier_atk - monster_def) - 1) * (monster_atk - soldier_def) * 2;
+			} else{
+				pie_result = parseInt(monster_hp / (soldier_atk - monster_def)) * (monster_atk - soldier_def) * 2;
+			}
         }
         else{
         	pie_result = "未知";

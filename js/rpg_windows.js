@@ -116,7 +116,8 @@ Window_Base.prototype.update = function() {
 
 Window_Base.prototype.updateOpen = function() {
     if (this._opening) {
-        this.openness += 32;
+        // this.openness += 32;
+        this.openness += 999;
         if (this.isOpen()) {
             this._opening = false;
         }
@@ -125,7 +126,8 @@ Window_Base.prototype.updateOpen = function() {
 
 Window_Base.prototype.updateClose = function() {
     if (this._closing) {
-        this.openness -= 32;
+        // this.openness -= 32;
+        this.openness -= 999;
         if (this.isClosed()) {
             this._closing = false;
         }
@@ -4626,24 +4628,27 @@ Window_ScrollText.prototype.updateMessage = function() {
 };
 
 Window_ScrollText.prototype.scrollSpeed = function() {
-    var speed = $gameMessage.scrollSpeed() / 2;
-    if (this.isFastForward()) {
-        speed *= this.fastForwardRate();
-    }
-    return speed;
+    // var speed = $gameMessage.scrollSpeed() / 2;
+    // if (this.isFastForward()) {
+    //     speed *= this.fastForwardRate();
+    // }
+    // return speed;
+    return 999;
 };
 
 Window_ScrollText.prototype.isFastForward = function() {
-    if ($gameMessage.scrollNoFast()) {
-        return false;
-    } else {
-        return (Input.isPressed('ok') || Input.isPressed('shift') ||
-                TouchInput.isPressed());
-    }
+    // if ($gameMessage.scrollNoFast()) {
+    //     return false;
+    // } else {
+    //     return (Input.isPressed('ok') || Input.isPressed('shift') ||
+    //             TouchInput.isPressed());
+    // }
+    return true;
 };
 
 Window_ScrollText.prototype.fastForwardRate = function() {
     return 3;
+    // return 999;
 };
 
 Window_ScrollText.prototype.terminateMessage = function() {
@@ -4805,6 +4810,7 @@ Window_BattleLog.prototype.updateWait = function() {
 
 Window_BattleLog.prototype.updateWaitCount = function() {
     if (this._waitCount > 0) {
+        // this._waitCount -= this.isFastForward() ? 3 : 1;
         this._waitCount -= this.isFastForward() ? 3 : 1;
         if (this._waitCount < 0) {
             this._waitCount = 0;

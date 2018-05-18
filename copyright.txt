@@ -1,4 +1,5 @@
 HUD:SumRndmDde http://sumrndm.site/
+menu edit: HUD:SumRndmDde http://sumrndm.site/
 battle:Yanfly Engine
 choices:Hime HimeWorks (http://himeworks.com)
 popup info:RMMV.CO - LTN Games or just LTN Games
@@ -6,7 +7,7 @@ popup info:RMMV.CO - LTN Games or just LTN Games
 dialog: Yanfly Engine
 hotkey: Yanfly Engine
 fastbattle: ktakaki, –«ùï
-//Parallel Common Events in Battle: Barreytor
 victory aftermath: Yanfly Engine
-//summon actor: SumRndmDde http://sumrndm.site/
 finer enemy position: Mr. Trivel
+load menu: Yanfly Engine
+quit option in title: Atreyo Ray
